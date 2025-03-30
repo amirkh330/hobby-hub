@@ -17,7 +17,7 @@ export const EventCard = ({ event }: { event: IEventItem }) => {
       borderRadius="4px"
       color="amir.common"
       bg="amir.secondaryBg"
-      to={`/events/${event.eventId}/dates/${event.dateId}/times/${event.timeId}`}
+      to={`/event/120`}
     >
       <Flex mx="0">
         <Box mx="0">

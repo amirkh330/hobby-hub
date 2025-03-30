@@ -7,9 +7,9 @@ export const Footer = () => {
   const { pathname } = useLocation();
   const isActive = (url: string) => pathname !== url;
   const list = [
-    { icon: <MapPinArea size="20" />, text: "hobby map", url: "/hobby-map" },
-    { icon: <HouseLine size="20" />, text: "hobby list", url: "/hobby-list" },
     { icon: <Ticket size="20" />, text: "my events", url: "/my-events" },
+    { icon: <HouseLine size="20" />, text: "hobby list", url: "/hobby-list" },
+    { icon: <MapPinArea size="20" />, text: "hobby map", url: "/hobby-map" },
   ];
   return (
     <Flex

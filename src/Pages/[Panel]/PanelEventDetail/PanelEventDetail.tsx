@@ -9,62 +9,28 @@ import {
   AccordionItem,
   AccordionPanel,
   Box,
+  Button,
   chakra,
   Flex,
+  Icon,
   Image,
   Text,
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { PanelFooter } from "../PanelFooter/PanelFooter";
-
-export interface IPanelEventDetail {
-  id: number;
-  game: IPanelEventDetailGame;
-  income: IPanelEventDetailIncome;
-}
-
-export interface IPanelEventDetailGame {
-  gameType: string;
-  title: string;
-  logoUrl: string;
-  scenario: string;
-  rules: string;
-  mafia: Mafia;
-}
-
-export interface Mafia {
-  characters: Character[];
-}
-
-export interface Character {
-  title: string;
-  logoUrl: string;
-  description: string;
-}
-
-export interface IPanelEventDetailIncome {
-  totalAmount: number;
-  items: Item[];
-}
-
-export interface Item {
-  date: string;
-  from: string;
-  to: string;
-  amount: number;
-}
+import Map from "@/components/CoreComponents/Map/Map";
+import {
+  CalendarBlank,
+  Clock,
+  MapPin,
+  Person,
+  Users,
+} from "@phosphor-icons/react";
+import { Footer } from "@/components/Common/Footer/Footer";
 
 export const PanelEventDetail = () => {
   const { eventId } = useParams();
-  const [eventDetail, setEventDetail] = useState<IPanelEventDetail>();
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    CallApiHost.get(`events/${eventId}/_detail`)
-      .then(({ data }) => setEventDetail(data))
-      .finally(() => setLoading(false));
-  }, []);
 
   return (
     <chakra.div
@@ -75,184 +41,74 @@ export const PanelEventDetail = () => {
       m="0"
       justifyContent="space-between"
     >
-      {loading ? (
+      {false ? (
         <Loading />
       ) : (
-        <chakra.div mx="0" p="2" overflow="auto">
-          <Flex justifyContent="flex-center" mx="0" mb="4">
-            <Image
-              mx={0}
-              me={2}
-              w="88px"
-              h="104px"
-              objectFit="cover"
-              borderRadius={"8px"}
-              src={eventDetail?.game.logoUrl}
-            />
-            <Box mx="0">
-              <Text fontSize="14px" fontWeight={500} color="amir.common">
-                {eventDetail?.game.title}
+        <chakra.div mx="0" px="3" overflow="auto">
+          <Box mx="0">
+            <Flex justifyContent="flex-center" mx="0" mb="4">
+              <Image
+                mx={0}
+                me={2}
+                w="full"
+                h="104px"
+                objectFit="cover"
+                borderRadius={"8px"}
+                src={"/images/woman.jpg"}
+              />
+            </Flex>
+
+            <Text fontSize="18px" fontWeight={500} color="amir.common">
+              Going to eat burger
+            </Text>
+            <Text fontSize="14px" my="4" color="amir.common">
+              Lorem Ipsum is simply dummy text of the printing and typesetting
+              industry. Lorem Ipsum has been the industry's standard dummy text
+              ever since the 1500s, when an unknown printer took a galley of
+              type and scrambled it to make a type specimen book. It has
+              survived not only five centuries, but also the leap into
+              electronic typesetting, remaining essentially unchanged. It was
+              popularised in the 1960s with the release of Letraset sheets
+              containing Lorem Ipsum passages, and more recently with desktop
+              publishing software like Aldus PageMaker including versions of
+              Lorem Ipsum.
+            </Text>
+            <Map />
+            <Flex my="2" alignItems="center" width={"full"} color={"amir.common"}>
+              <Icon as={CalendarBlank} mx="2" />
+              <Text fontSize="14px"  color="amir.common">
+                2025/10/12
               </Text>
-            </Box>
-          </Flex>
-          <Accordion borderColor={"gray.600"} mx={0} allowToggle>
-            {/* Section 1 */}
-            <AccordionItem p="4">
-              <AccordionButton justifyContent="space-between" px="0">
-                <Text fontSize={"16px"} fontWeight={600} color="amir.common">
-                  درآمد ایونت{" "}
-                </Text>
-                <AccordionIcon mx="0" color="amir.common" />
-              </AccordionButton>
-              <AccordionPanel pb={4}>
-                <Flex
-                  border="1px"
-                  py="2"
-                  px="4"
-                  my="1"
-                  borderRadius="4px"
-                  alignItems="center"
-                  borderColor="amir.secondaryVariant"
-                  bgColor="amir.secondaryBg"
-                  justifyContent="space-between"
-                  gap={2}
-                >
-                  <Text fontSize={"12px"} fontWeight={400} color="amir.common">
-                    سانس‌ها
-                  </Text>
-                  <Text fontSize={"12px"} fontWeight={400} color="amir.common">
-                    درآمد (تومان)
-                  </Text>
-                </Flex>
-                {eventDetail?.income?.items?.map((item, index) => (
-                  <Flex
-                    border="1px"
-                    py="2"
-                    px="4"
-                    my="1"
-                    borderRadius="4px"
-                    alignItems="center"
-                    borderColor="amir.secondaryVariant"
-                    bgColor="amir.secondaryBg"
-                    justifyContent="space-between"
-                    key={index}
-                    gap={2}
-                  >
-                    <Flex
-                      mx="0"
-                      gap="1"
-                      justifyContent="flex-start"
-                      alignItems="center"
-                    >
-                      <Text
-                        fontSize={"12px"}
-                        fontWeight={400}
-                        color="amir.common"
-                      >
-                        {item.date}
-                      </Text>
-                      <Text
-                        fontSize={"12px"}
-                        fontWeight={400}
-                        color="amir.common"
-                      >
-                        {item.from} تا
-                      </Text>
-                      <Text
-                        fontSize={"12px"}
-                        fontWeight={400}
-                        color="amir.common"
-                      >
-                        {item.to}
-                      </Text>
-                    </Flex>
+            </Flex>
+            <Flex my="2" alignItems="center" width={"full"} color={"amir.common"}>
+              <Icon as={Users} mx="2" />
+              <Text fontSize="14px"  color="amir.common">
+                3 person
+              </Text>
+            </Flex>
+            <Flex my="2" alignItems="center" width={"full"} color={"amir.common"}>
+              <Icon as={MapPin} mx="2" />
+              <Text fontSize="14px"  color="amir.common">
+                Address tehran, tehran st. 123
+              </Text>
+            </Flex>
+          </Box>
 
-                    <Text
-                      textAlign="center"
-                      fontSize={"12px"}
-                      fontWeight={400}
-                      color="amir.common"
-                    >
-                      {Toman(item.amount)}
-                    </Text>
-                  </Flex>
-                ))}
-                <Flex
-                  border="1px"
-                  py="2"
-                  px="4"
-                  my="1"
-                  borderRadius="4px"
-                  alignItems="center"
-                  borderColor="amir.secondaryVariant"
-                  bgColor="#3D0368"
-                  justifyContent="space-between"
-                  gap={2}
-                >
-                  <Text fontSize={"12px"} fontWeight={400} color="amir.common">
-                    مجموع درآمد
-                  </Text>
-                  <Text fontSize={"12px"} fontWeight={400} color="amir.common">
-                    {Toman(eventDetail?.income?.totalAmount!)}
-                  </Text>
-                </Flex>
-              </AccordionPanel>
-            </AccordionItem>
-
-            {/* Section 2 */}
-            <AccordionItem p="4">
-              <AccordionButton justifyContent="space-between" px="0">
-                <Text fontSize={"16px"} fontWeight={600} color="amir.common">
-                  سناریو بازی
-                </Text>
-                <AccordionIcon mx="0" color="amir.common" />
-              </AccordionButton>
-              <AccordionPanel
-                fontSize={"14px"}
-                fontWeight={400}
-                color="amir.common"
-                pb={4}
-              >
-                {eventDetail?.game?.scenario}
-              </AccordionPanel>
-            </AccordionItem>
-
-            {/* Section 3 */}
-            <AccordionItem p="4">
-              <AccordionButton justifyContent="space-between" px="0">
-                <Text fontSize={"16px"} fontWeight={600} color="amir.common">
-                  کاراکترهای بازی
-                </Text>
-                <AccordionIcon mx="0" color="amir.common" />
-              </AccordionButton>
-              <AccordionPanel pb={4}>
-                <Characters
-                  characters={eventDetail?.game?.mafia?.characters!}
-                />
-              </AccordionPanel>
-            </AccordionItem>
-
-            {/* Section 4 */}
-            <AccordionItem p="4">
-              <AccordionButton justifyContent="space-between" px="0">
-                <Text fontSize={"16px"} fontWeight={600} color="amir.common">
-                  قوانین بازی
-                </Text>
-                <AccordionIcon mx="0" color="amir.common" />
-              </AccordionButton>
-              <AccordionPanel
-                fontSize={"14px"}
-                fontWeight={400}
-                color="amir.common"
-                pb={4}
-              >
-                {eventDetail?.game?.rules}
-              </AccordionPanel>
-            </AccordionItem>
-          </Accordion>
+          <Button
+            my="2"
+            w="full"
+            fontSize="12px"
+            border="1px solid"
+            borderRadius="6px"
+            color="amir.primary"
+            bgColor="transparent"
+            borderColor="amir.primary"
+          >
+            Apply
+          </Button>
         </chakra.div>
       )}
-      <PanelFooter />
+      <Footer />
     </chakra.div>
   );
 };

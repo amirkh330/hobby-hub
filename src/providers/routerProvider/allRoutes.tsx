@@ -3,6 +3,7 @@ import { Events } from "@/Pages/[Customer]/Events/Events";
 import { HobbyMap } from "@/Pages/[Customer]/HobbyMap/HobbyMap";
 import { MyEvents } from "@/Pages/[Customer]/MyEvents/MyEvents";
 import { PanelEventCreate } from "@/Pages/[Panel]/PanelEventCreate/PanelEventCreate";
+import { PanelEventDetail } from "@/Pages/[Panel]/PanelEventDetail/PanelEventDetail";
 import useAuthStore from "@/store/authStore";
 import { Navigate, RouteObject } from "react-router-dom";
 
@@ -23,11 +24,8 @@ export const allRoutes: Array<RouteObject> = [
   { path: "/my-events", element: <MyEvents /> },
   { path: "/hobby-map", element: <HobbyMap /> },
   { path: "/hobby-list", element: <Events /> },
-  {
-    path: "/create-event",
-    element: <PanelEventCreate />,
-    // element: <PrivateRoute element={<PanelEventCreate />} />,
-  },
+  { path: "/create-event", element: <PanelEventCreate /> },
+  { path: "/event/:eventId", element: <PanelEventDetail /> },
 
   // { path: "/panel/login", element:<PanelLogin /> },
   // { path: "/panel/sign-in", element: <PrivateRoute element={<PanelSignIn />} isHost />},

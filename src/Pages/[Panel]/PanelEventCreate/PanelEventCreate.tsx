@@ -1,19 +1,18 @@
 import { Footer } from "@/components/Common/Footer/Footer";
+import { CustomDatePicker } from "@/components/CoreComponents/CustomDatePicker/CustomDatePicker";
+import Map from "@/components/CoreComponents/Map/Map";
 import {
   Button,
-  Center,
   chakra,
   FormControl,
   FormErrorMessage,
   FormLabel,
   Input,
   Select,
-  VStack,
+  Textarea,
+  VStack
 } from "@chakra-ui/react";
-import { Controller } from "react-hook-form";
 import { usePanelEventCreate } from "./PanelEventCreate.biz";
-import { CustomDatePicker } from "@/components/CoreComponents/CustomDatePicker/CustomDatePicker";
-import Map from "@/components/CoreComponents/Map/Map";
 
 export const PanelEventCreate = () => {
   const { handleSubmit, onSubmit, control, errors, register } =
@@ -54,11 +53,22 @@ export const PanelEventCreate = () => {
               <FormLabel fontSize={"16px"} fontWeight={600} color="amir.common">
                 Description
               </FormLabel>
-              <Input
+              <Textarea
                 placeholder="event description"
                 {...register("description")}
               />
               <FormErrorMessage>{errors.description?.message}</FormErrorMessage>
+            </FormControl>
+
+            <FormControl isInvalid={!!errors.address}>
+              <FormLabel fontSize={"16px"} fontWeight={600} color="amir.common">
+                Address
+              </FormLabel>
+              <Textarea
+                placeholder="event address"
+                {...register("address")}
+              />
+              <FormErrorMessage>{errors.address?.message}</FormErrorMessage>
             </FormControl>
 
             <FormControl isInvalid={!!errors.location}>

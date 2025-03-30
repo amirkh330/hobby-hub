@@ -29,6 +29,7 @@ const schema = yup.object().shape({
   title: yup.string().required(""),
   category: yup.string().required(""),
   location: yup.string().required(""),
+  address: yup.string().required(""),
   date: yup.string().required(""),
   description: yup.string().required("آدرس الزامی است."),
 });
