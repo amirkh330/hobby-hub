@@ -1,6 +1,9 @@
 import { CallApiHost } from "@/settings/axiosConfig";
 import { IScenario } from "@/types/responses/ResponsesTypes";
+import { yupResolver } from "@hookform/resolvers/yup";
 import { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
+import * as yup from "yup";
 
 interface ICreateSans {
   date: string;
@@ -11,19 +14,21 @@ interface ICreateSans {
   to: string;
 }
 export const usePanelEventCreate = () => {
-  const [scenarios, setScenarios] = useState<IScenario[]>([]);
-  const [activeScenarios, setActiveScenarios] = useState<
-    IScenario | undefined
-  >();
-  const [loading, setLoading] = useState(false);
-  const [loadingButton, setLoadingButton] = useState(false);
-
-  useEffect(() => {
-    setLoading(true);
-    CallApiHost("/games/mafia/scenarios")
-      .then(({ data }) => setScenarios(data))
-      .finally(() => setLoading(false));
-  }, []);
-
-  return { scenarios, loading, activeScenarios, setActiveScenarios };
+  const {
+    register,
+    handleSubmit,
+    control,
+    setValue,
+    formState: { errors },
+  } = useForm({ resolver: yupResolver(schema) });
+  const onSubmit = () => {};
+  return { handleSubmit, onSubmit, control, errors, register };
 };
+
+const schema = yup.object().shape({
+  title: yup.string().required(""),
+  category: yup.string().required(""),
+  location: yup.string().required(""),
+  date: yup.string().required(""),
+  description: yup.string().required("آدرس الزامی است."),
+});

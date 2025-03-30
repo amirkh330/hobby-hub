@@ -30,7 +30,7 @@ export const HobbyMap = () => {
       justifyContent="space-between"
     >
       <chakra.div px={4} m="0" overflowY="auto">
-        <Map />
+        <Map height="100vh" />
       </chakra.div>
       <Footer />
     </chakra.div>

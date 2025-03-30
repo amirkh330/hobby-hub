@@ -10,10 +10,12 @@ import "leaflet/dist/leaflet.css";
 import { useState } from "react";
 
 const Map = ({
+  height = "200px",
   lat = 35.72445859782193,
   lng = 51.47236884295126,
   setNewPin,
 }: {
+  height?: string;
   lat?: number;
   lng?: number;
   setNewPin?: ({ lat, lng }: { lat: number; lng?: number }) => void;
@@ -34,7 +36,7 @@ const Map = ({
       center={[lat, lng] as LatLngExpression}
       zoom={13}
       scrollWheelZoom={false}
-      style={{ height: "100vh", width: "100%", borderRadius: "8px", zIndex: 5 }}
+      style={{ height, width: "100%", borderRadius: "8px", zIndex: 5 }}
     >
       <TileLayer
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'

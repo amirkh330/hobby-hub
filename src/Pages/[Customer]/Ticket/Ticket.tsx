@@ -1,7 +1,7 @@
 import BottomSheet from "@/components/CoreComponents/BottomSheet/BottomSheet";
 import { Box, Button, Divider, Image, Text, chakra } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
-import { ITicketItem } from "../MyTickets/MyTickets";
+import { ITicketItem } from "../MyEvents/MyEvents";
 
 export const Ticket = ({
   isOpen,

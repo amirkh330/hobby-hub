@@ -13,25 +13,25 @@ export const Layout = () => {
   const { logout, login, isAuth } = useAuthStore();
   const navigate = useNavigate();
   const toast = useToast();
-  useEffect(() => {
-    CallApi.get(`/me`)
-      .then(( res : any) => {
-        !isAuth && login(res.data.isHost);
-      })
-      .catch((error) => {
-        if (error.status == 401) {
-          logout();
-          // navigate("/");
-          // onOpen();
-          // toast({
-          //   description: "لطفا وارد شوید",
-          //   status: "info",
-          //   duration: 2000,
-          //   position: "top",
-          // });
-        }
-      });
-  }, []);
+  // useEffect(() => {
+  //   CallApi.get(`/me`)
+  //     .then(( res : any) => {
+  //       !isAuth && login(res.data.isHost);
+  //     })
+  //     .catch((error) => {
+  //       if (error.status == 401) {
+  //         logout();
+  //         // navigate("/");
+  //         // onOpen();
+  //         // toast({
+  //         //   description: "لطفا وارد شوید",
+  //         //   status: "info",
+  //         //   duration: 2000,
+  //         //   position: "top",
+  //         // });
+  //       }
+  //     });
+  // }, []);
   return (
     <Box maxWidth="400px" width="100%" bg="amir.mainBg" height="100dvh">
       <Header />

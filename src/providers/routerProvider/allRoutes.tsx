@@ -1,35 +1,10 @@
-import { PaymentPreview } from "@/Pages/[Customer]/Payment-Preview/PaymentPreview";
-import { CoffeesShops } from "@/Pages/[Customer]/Coffees-shops/Coffees-shops";
-import { EventReserve } from "@/Pages/[Customer]/EventReserve/EventReserve";
 import { NotFound } from "@/components/Common/Notfound/NotFound";
-import { EventDetail } from "@/Pages/[Customer]/EventDetail/EventDetail";
 import { Events } from "@/Pages/[Customer]/Events/Events";
-import { Navigate, RouteObject } from "react-router-dom";
-import { PaymentCallBack } from "@/Pages/[Customer]/PaymentCallBack/PaymentCallBack";
-import { MyTickets } from "@/Pages/[Customer]/MyTickets/MyTickets";
-import { Profile } from "@/Pages/[Customer]/Profile/Profile";
-import { Wallet } from "@/Pages/[Customer]/Wallet/Wallet";
-import { EditProfile } from "@/Pages/[Customer]/EditProfile/EditProfile";
-import { Transactions } from "@/Pages/[Customer]/Transactions/Transactions";
-import { PaymentFailed } from "@/Pages/[Customer]/Payment-Failed/PaymentFailed";
-import { PaymentSuccess } from "@/Pages/[Customer]/Payment-Success/PaymentSuccess";
-import { CoffeeShopDetail } from "@/Pages/[Customer]/CoffeeShopDetail/CoffeeShopDetail";
-import useAuthStore from "@/store/authStore";
-import { Host } from "@/Pages/[Customer]/Host/Host";
-import { Camera } from "@/Pages/[Customer]/Camera/Camera";
-import { PanelLogin } from "@/Pages/[Panel]/PanelLogin/PanelLogin";
-import { PanelEvents } from "@/Pages/[Panel]/PanelEvents/PanelEvents";
-import { PanelSignIn } from "@/Pages/[Panel]/PanelSignIn/PanelSignIn";
-import { PanelEventDetail } from "@/Pages/[Panel]/PanelEventDetail/PanelEventDetail";
-import { PanelEventCreate } from "@/Pages/[Panel]/PanelEventCreate/PanelEventCreate";
-import { PanelGame } from "@/Pages/[Panel]/PanelGame/PanelGame";
-import { PanelRoles } from "@/Pages/[Panel]/PanelRoles/PanelRoles";
-import { PanelStart } from "@/Pages/[Panel]/PanelStart/PanelStart";
-import { RollPreview } from "@/Pages/[Panel]/RollPreview/RollPreview";
-import { PanelRegister } from "@/Pages/[Panel]/PanelRegister/PanelRegister";
-import { PanelRate } from "@/Pages/[Panel]/PanelRate/PanelRate";
-import { PanelRegisterSuccess } from "@/Pages/[Panel]/PanelRegisterSuccess/PanelRegisterSuccess";
 import { HobbyMap } from "@/Pages/[Customer]/HobbyMap/HobbyMap";
+import { MyEvents } from "@/Pages/[Customer]/MyEvents/MyEvents";
+import { PanelEventCreate } from "@/Pages/[Panel]/PanelEventCreate/PanelEventCreate";
+import useAuthStore from "@/store/authStore";
+import { Navigate, RouteObject } from "react-router-dom";
 
 const PrivateRoute = ({
   element,
@@ -45,9 +20,14 @@ const PrivateRoute = ({
 };
 
 export const allRoutes: Array<RouteObject> = [
-  { path: "/my-events", element: <MyTickets /> },
+  { path: "/my-events", element: <MyEvents /> },
   { path: "/hobby-map", element: <HobbyMap /> },
   { path: "/hobby-list", element: <Events /> },
+  {
+    path: "/create-event",
+    element: <PanelEventCreate />,
+    // element: <PrivateRoute element={<PanelEventCreate />} />,
+  },
 
   // { path: "/panel/login", element:<PanelLogin /> },
   // { path: "/panel/sign-in", element: <PrivateRoute element={<PanelSignIn />} isHost />},

@@ -13,11 +13,11 @@ export const CustomDatePicker = ({
 
   return (
     <Calendar
-      className="teal"
+      // className="teal"
       value={value}
       onChange={(e: any) => setValue(e)}
-      calendar={persian}
-      locale={persian_fa}
+      // calendar={persian}
+      // locale={persian_fa}
     />
   );
 };

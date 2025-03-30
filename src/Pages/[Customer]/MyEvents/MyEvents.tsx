@@ -10,7 +10,7 @@ import {
   chakra,
   useDisclosure,
 } from "@chakra-ui/react";
-import { CalendarBlank, Coffee } from "@phosphor-icons/react/dist/ssr";
+import { CalendarBlank, MapPin, Plus } from "@phosphor-icons/react/dist/ssr";
 import React, { useEffect, useState } from "react";
 import { Ticket } from "../Ticket/Ticket";
 import { CallApi } from "@/settings/axiosConfig";
@@ -41,7 +41,7 @@ export interface Host {
   districtTitle: string;
 }
 
-export const MyTickets = () => {
+export const MyEvents = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const navigate = useNavigate();
   const {
@@ -124,7 +124,22 @@ export const MyTickets = () => {
           </chakra.div>
         );
       default:
-        return "";
+        return (
+          <chakra.div
+            onClick={() => navigate(`/games/sessions/${gameSessionId}`)}
+            w="fit-content"
+            mx="0"
+            p="1"
+            borderRadius={"4px"}
+            fontSize={"12px"}
+            border={"1px solid"}
+            bgColor={"transparent"}
+            borderColor={"amir.primary"}
+            color={"amir.primary"}
+          >
+            available
+          </chakra.div>
+        );
     }
   };
   return (
@@ -134,9 +149,21 @@ export const MyTickets = () => {
       flexDirection="column"
       justifyContent="space-between"
     >
+      <Flex pt="4" w="full">
+        <Button
+          w="full"
+          mx="4"
+          bgColor={"amir.primary"}
+          as={Link}
+          to="/create-event"
+        >
+          Create Event
+        </Button>
+      </Flex>
       {loading ? (
         <Loading />
-      ) : !reserveList.length ? (
+      ) : false ? (
+        // ) : !reserveList.length ? (
         <chakra.div p="4" overflow={"auto"} mt="50%">
           <Text
             textAlign="center"
@@ -169,84 +196,86 @@ export const MyTickets = () => {
         </chakra.div>
       ) : (
         <chakra.div px="4" mx="0" overflow={"auto"}>
-          {reserveList.map((item) => {
-            return (
-              <Flex
-                key={item.event.title}
-                mx="0"
-                my="4"
-                p="2"
-                flexDirection="column"
-                bgColor="amir.secondaryBg"
-                borderRadius={"8px"}
-              >
+          {Array(10)
+            .fill(21)
+            .map((item) => {
+              return (
                 <Flex
+                  key={"item.event.title"}
                   mx="0"
-                  alignItems="end"
-                  justifyContent="start"
-                  gap="4"
-                  mb="2"
+                  my="4"
+                  p="2"
+                  flexDirection="column"
+                  bgColor="amir.secondaryBg"
+                  borderRadius={"8px"}
                 >
-                  <Image
+                  <Flex
                     mx="0"
-                    borderRadius="4px"
-                    src={item.event.logoUrl}
-                    objectFit="cover"
-                    width="96px"
-                    height="104px"
-                  />
-                  <Box mx="0" gap="6px" display="flex" flexDirection="column">
-                    {renderStatus(item)}
-                    <Text
-                      fontSize={"14px"}
-                      fontWeight={400}
-                      color="amir.common"
-                    >
-                      {item.event.title}
-                    </Text>
-                    <Text
-                      fontSize={"12px"}
-                      fontWeight={400}
-                      color="amir.secondary"
-                    >
-                      {item.event.host?.title} -{" "}
-                      {item.event.host?.districtTitle} <Icon as={Coffee} />
-                    </Text>
-                    <Text
-                      fontSize={"12px"}
-                      fontWeight={400}
-                      color="amir.secondary"
-                    >
-                      {item.event.dateTime} <Icon as={CalendarBlank} />
-                    </Text>
-                  </Box>
-                </Flex>
-                <Flex mx="0" alignItems="center" gap={2}>
-                  <Button
-                    variant="outline"
-                    borderColor="amir.secondary"
-                    color="amir.secondary"
-                    as={Link}
-                    to={`/events/${item.eventId}/dates/${item.dateId}/times/${item.timeId}`}
-                    w="50%"
+                    alignItems="end"
+                    justifyContent="start"
+                    gap="4"
+                    mb="2"
                   >
-                    مشاهده بازی
-                  </Button>
-                  <Button
-                    bgColor="amir.primary"
-                    color="amir.secondaryBg"
-                    w="50%"
-                    onClick={() => {
-                      onOpen();
-                      setActiveTicket(item);
-                    }}
-                  >
-                    مشاهده بلیط
-                  </Button>
+                    <Image
+                      mx="0"
+                      borderRadius="4px"
+                      src={"/images/woman.jpg"}
+                      objectFit="cover"
+                      width="96px"
+                      height="104px"
+                    />
+                    <Box mx="0" gap="6px" display="flex" flexDirection="column">
+                      {renderStatus(item)}
+                      <Text
+                        fontSize={"14px"}
+                        fontWeight={400}
+                        color="amir.common"
+                      >
+                        going to eat burger
+                      </Text>
+                      <Text
+                        fontSize={"12px"}
+                        fontWeight={400}
+                        color="amir.secondary"
+                      >
+                        Iran - tehran
+                        <Icon as={MapPin} />
+                      </Text>
+                      <Text
+                        fontSize={"12px"}
+                        fontWeight={400}
+                        color="amir.secondary"
+                      >
+                        23:00 <Icon as={CalendarBlank} />
+                      </Text>
+                    </Box>
+                  </Flex>
+                  <Flex mx="0" alignItems="center" gap={2}>
+                    <Button
+                      variant="outline"
+                      borderColor="amir.secondary"
+                      color="amir.secondary"
+                      as={Link}
+                      to={`/events/${item.eventId}/dates/${item.dateId}/times/${item.timeId}`}
+                      w="50%"
+                    >
+                      event visit
+                    </Button>
+                    <Button
+                      bgColor="amir.primary"
+                      color="amir.secondaryBg"
+                      w="50%"
+                      onClick={() => {
+                        onOpen();
+                        setActiveTicket(item);
+                      }}
+                    >
+                      ticket visit
+                    </Button>
+                  </Flex>
                 </Flex>
-              </Flex>
-            );
-          })}
+              );
+            })}
         </chakra.div>
       )}
       {isOpen && (
