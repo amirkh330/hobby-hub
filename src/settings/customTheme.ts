@@ -4,11 +4,11 @@ export const customTheme = extendTheme({
   direction: "rtl",
   colors: {
     amir: {
-      mainBg: "#2D2D2D",
-      secondaryBg: "#414141",
-      primary: "#AFE239",
-      secondary: "#CDCDCD",
-      secondaryVariant: "#AFAFAF",
+      mainBg: "#252422",
+      secondaryBg: "#403D39",
+      primary: "#FFB703",
+      secondary: "#D9D9D9",
+      secondaryVariant: "#A3A3A3",
       common: "#FFFFFF",
     },
   },

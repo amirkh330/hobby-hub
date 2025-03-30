@@ -18,7 +18,7 @@ export const Header = () => {
     >
       <Flex m="0" alignItems="center" gap="2">
         <Menu/>
-        <Text>جورچین</Text>
+        <Text>Hubby Hub</Text>
       </Flex>
 
       {isAuth ? (
@@ -27,7 +27,7 @@ export const Header = () => {
         </Box>
       ) : (
         <Box onClick={onOpen} m={0}>
-          ورود
+          Login
         </Box>
       )}
       <Login isOpen={isOpen} onOpen={onOpen} onClose={onClose} />

@@ -34,7 +34,7 @@ const Map = ({
       center={[lat, lng] as LatLngExpression}
       zoom={13}
       scrollWheelZoom={false}
-      style={{ height: "160px", width: "100%", borderRadius: "8px", zIndex: 5 }}
+      style={{ height: "100vh", width: "100%", borderRadius: "8px", zIndex: 5 }}
     >
       <TileLayer
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'

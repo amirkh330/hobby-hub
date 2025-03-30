@@ -49,7 +49,7 @@ export const Events = () => {
             </Icon>
           </InputRightElement>
           <Input
-            placeholder="جستوجو"
+            placeholder="search"
             bg="transparent"
             width="full"
             // p="1"
@@ -75,18 +75,20 @@ export const Events = () => {
           />
         </InputGroup>
 
-        <MainSwiper list={list} />
+        {/* <MainSwiper list={list} /> */}
 
-        <FilterSecession />
+        {/* <FilterSecession /> */}
         <Box
           //  overflowY="auto"
           w={"full"}
         >
           {loading && !eventList.length ? (
             <Loading />
-          ) : eventList.length ? (
+          ) : true ? (
+          // ) : eventList.length ? (
             <InfinityScroll
-              items={eventList}
+              items={Array(12).fill("12")}
+              // items={eventList}
               wrapper={<Grid templateColumns="repeat(2, 1fr)" />}
               total={total!}
               loading={loading}

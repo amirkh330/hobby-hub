@@ -37,7 +37,7 @@ export const Login = ({ isOpen = true, onOpen, onClose }: ILogin) => {
 
   return (
     <BottomSheet
-      title="ورود"
+      title="login"
       isOpen={isOpen}
       onOpen={onOpen}
       onClose={() => {
@@ -78,7 +78,7 @@ const PhoneNumberStep = ({
   return (
     <Box color="amir.mainBg" p="4">
       <Flex mb="4">
-        <Text color={"amir.common"}>شماره تلفن خود را وارد کنید</Text>
+        <Text color={"amir.common"}>please enter your phone number</Text>
       </Flex>
       <Input
         mb="4"
@@ -105,7 +105,7 @@ const PhoneNumberStep = ({
         onClick={handleSetPhoneNumber}
         isLoading={loading}
       >
-        ارسال
+        send
       </Button>
     </Box>
   );
@@ -114,7 +114,7 @@ const PhoneNumberStep = ({
 const OtpStep = ({ otp, setOtp, handleSendOtp, loading }: any) => {
   return (
     <Box mx="auto" p="4">
-      <Text color={"amir.common"}>کد ارسال شده را وارد کنید</Text>
+      <Text color={"amir.common"}>please insert your otp</Text>
       <HStack my="6" justifyContent={"space-around"} mx="8" dir="ltr">
         <PinInput
           value={otp}
@@ -146,7 +146,7 @@ const OtpStep = ({ otp, setOtp, handleSendOtp, loading }: any) => {
         w={"100%"}
         onClick={handleSendOtp}
       >
-        ورود
+        login
       </Button>
     </Box>
   );

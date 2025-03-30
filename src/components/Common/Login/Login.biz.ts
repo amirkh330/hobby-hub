@@ -41,7 +41,7 @@ export const useLogin = () => {
     if (phoneRegex.test(phoneNumber)) {
       handleSendOtp();
     } else {
-      setErrorMessage("شماره وارد شده صحیح نیست");
+      setErrorMessage("phone number is incorrect");
     }
   };
 

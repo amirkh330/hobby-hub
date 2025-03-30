@@ -20,8 +20,13 @@ export const EventCard = ({ event }: { event: IEventItem }) => {
       to={`/events/${event.eventId}/dates/${event.dateId}/times/${event.timeId}`}
     >
       <Box>
-        <Image h="200px" src={event.game.logoUrl} />
-        {allowShowHost && (
+        <Image
+          h="200px"
+          src={
+            "https://cdn.pixabay.com/photo/2020/06/08/16/19/woman-5275027_1280.jpg"
+          }
+        />
+        {/* {allowShowHost && (
           <Box
             borderRadius="50%"
             w="40px"
@@ -41,32 +46,32 @@ export const EventCard = ({ event }: { event: IEventItem }) => {
               mx="0"
             />
           </Box>
-        )}
+        )} */}
       </Box>
       <Box mx="0" gap="6px" p="1" display="flex" flexDirection="column">
         <Text fontSize={"14px"} color="amir.common">
-          {event.game.title}
+          going to the burger
         </Text>
         <Flex mx="0" alignItems={"center"} gap="1">
           <Icon mx="0" as={Coffee} />
 
-          {allowShowHost &&<Text fontSize={"10px"} color="amir.secondary">
-            {event.host.title} - {event.host.district}
-          </Text>}
+            <Text fontSize={"10px"} color="amir.secondary">
+              iran - tehran
+            </Text>
         </Flex>
         <Flex mx="0" alignItems={"center"} justifyContent="space-between">
           <Flex mx="0" alignItems={"center"} gap="1" flexWrap={"nowrap"}>
             <Icon mx="0" as={Calendar} />
 
             <Text fontSize={"10px"} color="amir.secondary">
-              {event.dateTime}
+              23:00
             </Text>
           </Flex>
           <Flex mx="0" alignItems={"center"} gap="1">
             <Icon mx="0" as={Users} />
 
             <Text fontSize={"10px"} color="amir.secondary">
-              نفر {event.remainingCapacity}
+              person 3
             </Text>
           </Flex>
         </Flex>
@@ -81,7 +86,7 @@ export const EventCard = ({ event }: { event: IEventItem }) => {
             </Text>
           ) : null}
           <Text fontSize={"10px"} color="amir.primary">
-            {Toman(event.finalPrice)}
+            Free
           </Text>
         </Flex>
       </Box>

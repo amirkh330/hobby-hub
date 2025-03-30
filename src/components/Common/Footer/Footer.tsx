@@ -1,16 +1,15 @@
 import { Box, Flex, Text } from "@chakra-ui/react";
 import { Coffee } from "@phosphor-icons/react";
-import { PuzzlePiece, Ticket } from "@phosphor-icons/react/dist/ssr";
-import React from "react";
-import { Link, useLocation, useNavigation, useParams } from "react-router-dom";
+import { MapPinArea, HouseLine, Ticket } from "@phosphor-icons/react/dist/ssr";
+import { Link, useLocation } from "react-router-dom";
 
 export const Footer = () => {
   const { pathname } = useLocation();
   const isActive = (url: string) => pathname !== url;
   const list = [
-    { icon: <PuzzlePiece size="20" />, text: "بازی", url: "/events" },
-    { icon: <Coffee size="20" />, text: "کافه", url: "/coffees" },
-    { icon: <Ticket size="20" />, text: "بازی‌های من", url: "/my-tickets" },
+    { icon: <MapPinArea size="20" />, text: "hobby map", url: "/hobby-map" },
+    { icon: <HouseLine size="20" />, text: "hobby list", url: "/hobby-list" },
+    { icon: <Ticket size="20" />, text: "my events", url: "/my-events" },
   ];
   return (
     <Flex

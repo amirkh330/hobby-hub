@@ -34,51 +34,33 @@ const Menu = () => {
             {/* <DrawerCloseButton /> */}
             <Icon mx="0" as={CloseButton} onClick={onClose} />
             <Text fontSize={"18px"} fontWeight={600}>
-              جورچین
+              Hubby Hub
             </Text>
           </Flex>
 
           <DrawerBody mx="0" textAlign={"right"}>
             <VStack align="start" spacing={4}>
-              <Link
-                to={isHost ? "/panel/events" : "/panel/login"}
-                onClick={onClose}
-                style={{ fontSize: "14px" }}
-              >
-                <Text color="amir.primary">ورود به عنوان کافه</Text>
-              </Link>
               <Divider borderColor={"amir.primary"} />
               <Link to="/" onClick={onClose} style={{ fontSize: "14px" }}>
-                صفحه اصلی
+                home
               </Link>
               <Link to="#about" onClick={onClose} style={{ fontSize: "14px" }}>
-                درباره ما
+                about us
               </Link>
               <Link
                 to="#services"
                 onClick={onClose}
                 style={{ fontSize: "14px" }}
               >
-                خدمات
+                service
               </Link>
               <Link
                 to="#contact"
                 onClick={onClose}
                 style={{ fontSize: "14px" }}
               >
-                تماس با ما
+                contact us
               </Link>
-
-              <a
-                target="_blank"
-                href="https://trustseal.enamad.ir/?id=566974&Code=1Zdbpg9ulLyXKUmt7oOg1yLncx04bbj4"
-              >
-                <img
-                  src="https://trustseal.enamad.ir/logo.aspx?id=566974&Code=1Zdbpg9ulLyXKUmt7oOg1yLncx04bbj4"
-                  alt=""
-                  //   code="1Zdbpg9ulLyXKUmt7oOg1yLncx04bbj4"
-                />
-              </a>
             </VStack>
           </DrawerBody>
         </DrawerContent>

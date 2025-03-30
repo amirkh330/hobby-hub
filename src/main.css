@@ -20,7 +20,7 @@
   src: url("/fonts/IRANYekanWeb(FaNum)Bold.ttf") format("truetype");
 }
 * {
-  font-family: "IranYekan";
+  /* font-family: ""; */
   max-width: 400px;
   margin: 0 auto;
 }

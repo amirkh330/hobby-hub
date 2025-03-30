@@ -63,7 +63,7 @@ export const MyTickets = () => {
       });
   }, []);
 
-  const renderStatus = ({status,gameSessionId}:ITicketItem) => {
+  const renderStatus = ({ status, gameSessionId }: ITicketItem) => {
     switch (status) {
       case "Ready":
         return (
@@ -144,8 +144,7 @@ export const MyTickets = () => {
             fontWeight={400}
             color="amir.common"
           >
-            برای دریافت بارکد اختصاصی، هر یک از افراد وارد سایت جورچین شده و در
-            صفحه (بازی‌های من)، شماره موبایل خود را وارد کنند.
+            for crete or show you`r events, please login
           </Text>
           {/* <Center>
             <Image
@@ -157,7 +156,7 @@ export const MyTickets = () => {
           </Center> */}
           <Center>
             <Button mt="8" onClick={onOpenLogin} bgColor="amir.primary" w="70%">
-              ورود
+              login
             </Button>
           </Center>
           {isOpenLogin && (
