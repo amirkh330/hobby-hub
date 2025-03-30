@@ -20,12 +20,7 @@ export const EventCard = ({ event }: { event: IEventItem }) => {
       to={`/events/${event.eventId}/dates/${event.dateId}/times/${event.timeId}`}
     >
       <Box>
-        <Image
-          h="200px"
-          src={
-            "https://cdn.pixabay.com/photo/2020/06/08/16/19/woman-5275027_1280.jpg"
-          }
-        />
+        <Image h="200px" src={"/images/woman.jpg"} />
         {/* {allowShowHost && (
           <Box
             borderRadius="50%"
@@ -55,9 +50,9 @@ export const EventCard = ({ event }: { event: IEventItem }) => {
         <Flex mx="0" alignItems={"center"} gap="1">
           <Icon mx="0" as={Coffee} />
 
-            <Text fontSize={"10px"} color="amir.secondary">
-              iran - tehran
-            </Text>
+          <Text fontSize={"10px"} color="amir.secondary">
+            iran - tehran
+          </Text>
         </Flex>
         <Flex mx="0" alignItems={"center"} justifyContent="space-between">
           <Flex mx="0" alignItems={"center"} gap="1" flexWrap={"nowrap"}>
