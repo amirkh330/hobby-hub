@@ -3,7 +3,7 @@ import { IsShowDiscount } from "@/utils/IsShowDiscount/IsShowDiscount";
 import { Toman } from "@/utils/Toman/Toman";
 import { Box, Card, Flex, Icon, Image, Text } from "@chakra-ui/react";
 import { Calendar } from "@phosphor-icons/react";
-import { Coffee, Users } from "@phosphor-icons/react/dist/ssr";
+import { MapPin, Users } from "@phosphor-icons/react/dist/ssr";
 import { Link } from "react-router-dom";
 
 export const EventCard = ({ event }: { event: IEventItem }) => {
@@ -19,10 +19,10 @@ export const EventCard = ({ event }: { event: IEventItem }) => {
       bg="amir.secondaryBg"
       to={`/events/${event.eventId}/dates/${event.dateId}/times/${event.timeId}`}
     >
-      <Box>
-        
-        <Image h="200px" src={"/images/woman.jpg"} />
-        {/* {allowShowHost && (
+      <Flex mx="0">
+        <Box mx="0">
+          <Image h="100px" src={"/images/woman.jpg"} />
+          {/* {allowShowHost && (
           <Box
             borderRadius="50%"
             w="40px"
@@ -43,49 +43,57 @@ export const EventCard = ({ event }: { event: IEventItem }) => {
             />
           </Box>
         )} */}
-      </Box>
-      <Box mx="0" gap="6px" p="1" display="flex" flexDirection="column">
-        <Text fontSize={"14px"} color="amir.common">
-          going to the burger
-        </Text>
-        <Flex mx="0" alignItems={"center"} gap="1">
-          <Icon mx="0" as={Coffee} />
-
-          <Text fontSize={"10px"} color="amir.secondary">
-            iran - tehran
+        </Box>
+        <Box
+          mx="0"
+          gap="6px"
+          px="2"
+          py="1"
+          display="flex"
+          flexDirection="column"
+        >
+          <Text fontSize={"14px"} color="amir.common">
+            going to the burger
           </Text>
-        </Flex>
-        <Flex mx="0" alignItems={"center"} justifyContent="space-between">
-          <Flex mx="0" alignItems={"center"} gap="1" flexWrap={"nowrap"}>
-            <Icon mx="0" as={Calendar} />
+          <Flex mx="0" alignItems={"center"} gap="1">
+            <Icon mx="0" as={MapPin} />
 
             <Text fontSize={"10px"} color="amir.secondary">
-              23:00
+              iran - tehran
             </Text>
+          </Flex>
+          <Flex mx="0" alignItems={"center"} justifyContent="space-between">
+            <Flex mx="0" alignItems={"center"} gap="1" flexWrap={"nowrap"}>
+              <Icon mx="0" as={Calendar} />
+
+              <Text fontSize={"10px"} color="amir.secondary">
+                23:00
+              </Text>
+            </Flex>
+            <Flex mx="0" alignItems={"center"} gap="1">
+              <Icon mx="0" as={Users} />
+
+              <Text fontSize={"10px"} color="amir.secondary">
+                person 3
+              </Text>
+            </Flex>
           </Flex>
           <Flex mx="0" alignItems={"center"} gap="1">
-            <Icon mx="0" as={Users} />
-
-            <Text fontSize={"10px"} color="amir.secondary">
-              person 3
+            {IsShowDiscount(event) ? (
+              <Text
+                fontSize={"10px"}
+                color="#FC8181"
+                textDecoration="line-through"
+              >
+                {Toman(event.basePrice)}
+              </Text>
+            ) : null}
+            <Text fontSize={"10px"} color="amir.primary">
+              Free
             </Text>
           </Flex>
-        </Flex>
-        <Flex mx="0" alignItems={"center"} gap="1">
-          {IsShowDiscount(event) ? (
-            <Text
-              fontSize={"10px"}
-              color="#FC8181"
-              textDecoration="line-through"
-            >
-              {Toman(event.basePrice)}
-            </Text>
-          ) : null}
-          <Text fontSize={"10px"} color="amir.primary">
-            Free
-          </Text>
-        </Flex>
-      </Box>
+        </Box>
+      </Flex>
     </Card>
   );
 };

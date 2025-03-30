@@ -6,7 +6,7 @@ export const Loading = () => {
     <Flex w={"full"} flexDirection={"column"} alignItems={"center"} mt="50%">
       <Spinner color="amir.primary" size="lg" />
       <Text color="amir.primary" mx="auto" mt="4">
-        در حال بارگزاری
+        loading
       </Text>
     </Flex>
   );

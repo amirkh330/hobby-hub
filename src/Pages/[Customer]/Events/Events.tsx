@@ -85,11 +85,11 @@ export const Events = () => {
           {loading && !eventList.length ? (
             <Loading />
           ) : true ? (
-          // ) : eventList.length ? (
+            // ) : eventList.length ? (
             <InfinityScroll
               items={Array(12).fill("12")}
               // items={eventList}
-              wrapper={<Grid templateColumns="repeat(2, 1fr)" />}
+              wrapper={<Grid templateColumns="repeat(1, 1fr)" />}
               total={total!}
               loading={loading}
               loadMore={() => {
