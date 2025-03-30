@@ -20,6 +20,7 @@ export const EventCard = ({ event }: { event: IEventItem }) => {
       to={`/events/${event.eventId}/dates/${event.dateId}/times/${event.timeId}`}
     >
       <Box>
+        
         <Image h="200px" src={"/images/woman.jpg"} />
         {/* {allowShowHost && (
           <Box
