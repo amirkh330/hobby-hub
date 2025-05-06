@@ -6,8 +6,11 @@ import { Calendar } from "@phosphor-icons/react";
 import { MapPin, Users } from "@phosphor-icons/react/dist/ssr";
 import { Link } from "react-router-dom";
 
-export const EventCard = ({ event }: { event: IEventItem }) => {
-  const allowShowHost = !!event.host;
+// export const EventCard = ({ event }: { event: IEventItem }) => {
+export const EventCard = ({ event }: { event: any }) => {
+  const date = new Date(event.datetime);
+  const cardDate = date.toLocaleDateString();
+  const cardTime = date.toLocaleTimeString();
   return (
     <Card
       as={Link}
@@ -59,7 +62,7 @@ export const EventCard = ({ event }: { event: IEventItem }) => {
             <Icon mx="0" as={MapPin} />
 
             <Text fontSize={"10px"} color="amir.secondary">
-              iran - tehran
+              {event.address}
             </Text>
           </Flex>
           <Flex mx="0" alignItems={"center"} justifyContent="space-between">
@@ -67,16 +70,16 @@ export const EventCard = ({ event }: { event: IEventItem }) => {
               <Icon mx="0" as={Calendar} />
 
               <Text fontSize={"10px"} color="amir.secondary">
-                23:00
+                {cardDate} - {cardTime}
               </Text>
             </Flex>
-            <Flex mx="0" alignItems={"center"} gap="1">
+            {/* <Flex mx="0" alignItems={"center"} gap="1">
               <Icon mx="0" as={Users} />
 
               <Text fontSize={"10px"} color="amir.secondary">
                 person 3
               </Text>
-            </Flex>
+            </Flex> */}
           </Flex>
           <Flex mx="0" alignItems={"center"} gap="1">
             {IsShowDiscount(event) ? (

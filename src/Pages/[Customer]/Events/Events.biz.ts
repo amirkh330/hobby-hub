@@ -30,16 +30,18 @@ export const useEvents = () => {
 
   useEffect(() => {
     setLoading(true);
-    CallApi.get(`/events/_filter?${params}`)
+    CallApi.get(`event/`)
+      // CallApi.get(`event/attendee/_filter?${params}`)
       .then(({ data }) => {
-        if ((queryType || time) && page === 1) {
-          return setEventList(data.items);
+        console.log("data:", data.page_count);
+        if (data.page_count === 1) {
+          return setEventList(data.results);
         }
-        page === 1
-          ? setEventList(data.items)
-          : setEventList((prev) => [...prev, ...data.items]);
+        // page === 1
+        //   ? setEventList(data.items)
+        //   : setEventList((prev) => [...prev, ...data.items]);
 
-        setTotal(data.total);
+        setTotal(data.count);
       })
       .finally(() => {
         setLoading(false);
@@ -48,11 +50,11 @@ export const useEvents = () => {
 
   const [list, setList] = useState([]);
 
-  useEffect(() => {
-    CallApi.get("/cms/slider-items").then(({ data }) => {
-      setList(data);
-    });
-  }, []);
+  // useEffect(() => {
+  //   CallApi.get("/cms/slider-items").then(({ data }) => {
+  //     setList(data);
+  //   });
+  // }, []);
 
   return { eventList, loading, total, setPage, page, list };
 };
