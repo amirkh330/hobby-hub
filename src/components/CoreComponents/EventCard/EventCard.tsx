@@ -20,7 +20,7 @@ export const EventCard = ({ event }: { event: any }) => {
       borderRadius="4px"
       color="amir.common"
       bg="amir.secondaryBg"
-      to={`/event/120`}
+      to={`/event/${event.id}`}
     >
       <Flex mx="0">
         <Box mx="0">
