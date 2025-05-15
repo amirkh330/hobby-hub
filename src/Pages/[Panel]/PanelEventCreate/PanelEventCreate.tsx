@@ -116,7 +116,7 @@ export const PanelEventCreate = () => {
               {/* <Input placeholder="event date" {...register("date")} mt={4} /> */}
               <FormErrorMessage>{errors.date?.message}</FormErrorMessage>
             </FormControl>
-
+{/* 
             <FormControl isInvalid={!!errors.upload}>
               <FormLabel fontSize={"16px"} fontWeight={600} color="amir.common">
                 upload images
@@ -138,7 +138,6 @@ export const PanelEventCreate = () => {
                   textAlign="center"
                 >
                   <VStack spacing={3}>
-                    {/* <Icon as={Upload} boxSize={10} color="blue.400" /> */}
                     <Text fontSize="lg" fontWeight="medium" color="gray.500">
                       Click to upload or drag and drop
                     </Text>
@@ -155,7 +154,9 @@ export const PanelEventCreate = () => {
                 </Box>
               </Flex>
               <FormErrorMessage>{errors.upload?.message}</FormErrorMessage>
-            </FormControl>
+            </FormControl> */}
+
+            
           </VStack>
 
           <Button w="full" type="submit" mx="0" my="4" bgColor={"amir.primary"}>

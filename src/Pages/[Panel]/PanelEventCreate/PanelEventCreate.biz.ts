@@ -25,6 +25,7 @@ export const usePanelEventCreate = () => {
     formState: { errors },
   } = useForm({ resolver: yupResolver(schema) });
   const onSubmit = (e: any) => {
+    console.log('e:', e)
     // const formData = new FormData();
     // Object.keys(data).forEach((key) => {
     //   const typedKey = key as keyof FormData;
@@ -36,7 +37,6 @@ export const usePanelEventCreate = () => {
     // });
 
 
-    console.log("e:", e.date);
     setLoading(true);
     const newData = {
       latitude: e.location.lat,
@@ -48,10 +48,11 @@ export const usePanelEventCreate = () => {
       title: e.title,
       recurrence: "ONE_TIME",
     };
-
+    
+    console.log('newData:', newData)
     CallApi.post("/event/", newData)
       .then(() => {
-        navigate("/hobby-list");
+        // navigate("/hobby-list");
       })
       .finally(() => setLoading(false));
   };
@@ -72,7 +73,7 @@ const schema = yup.object().shape({
   category: yup.string().required(""),
   location: yup.object().required("please insert location"),
   address: yup.string().required(""),
-  upload: yup.array().required(""),
+  // upload: yup.array().required(""),
   date: yup.string().required("please insert date"),
   description: yup.string().required(""),
 });

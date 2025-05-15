@@ -18,8 +18,10 @@ import {
 } from "@chakra-ui/react";
 import { MagnifyingGlass } from "@phosphor-icons/react";
 import Map from "@/components/CoreComponents/Map/Map";
+import { useHobbyMap } from "./HobbyMap.biz";
 
 export const HobbyMap = () => {
+  const { setMapBounds, eventListPoint } = useHobbyMap();
   return (
     <chakra.div
       pt="4"
@@ -30,7 +32,12 @@ export const HobbyMap = () => {
       justifyContent="space-between"
     >
       <chakra.div px={4} m="0" overflowY="auto">
-        <Map height="100vh" />
+        <Map
+          showPointer={false}
+          height="100vh"
+          mapBounds={setMapBounds}
+          targets={eventListPoint}
+        />
       </chakra.div>
       <Footer />
     </chakra.div>

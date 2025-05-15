@@ -382,11 +382,11 @@ const renderStatus = (item: any) => {
     case "ReadyToSetup":
       return (
         <Button
-          w="full"
-          as={Link}
-          fontSize={"12px"}
-          borderRadius={"6px"}
-          bgColor={"amir.primary"}
+        as={Link}
+        fontSize={"12px"}
+        borderRadius={"6px"}
+        w="full"
+        bgColor={"amir.primary"}
           to={`/panel/games/${item.gameSessionId}`}
         >
           آماده‌سازی بازی
