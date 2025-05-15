@@ -1,7 +1,7 @@
 import { extendTheme } from "@chakra-ui/react";
 
 export const customTheme = extendTheme({
-  direction: "rtl",
+  direction: "ltr",
   colors: {
     amir: {
       mainBg: "#252422",

@@ -33,7 +33,6 @@ export const useEvents = () => {
     CallApi.get(`event/`)
       // CallApi.get(`event/attendee/_filter?${params}`)
       .then(({ data }) => {
-        console.log("data:", data.page_count);
         if (data.page_count === 1) {
           return setEventList(data.results);
         }

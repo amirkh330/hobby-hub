@@ -56,7 +56,7 @@ export const EventCard = ({ event }: { event: any }) => {
           flexDirection="column"
         >
           <Text fontSize={"14px"} color="amir.common">
-            going to the burger
+            {event?.title}
           </Text>
           <Flex mx="0" alignItems={"center"} gap="1">
             <Icon mx="0" as={MapPin} />

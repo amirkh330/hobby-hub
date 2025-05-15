@@ -6,17 +6,17 @@ export const CallApi: AxiosInstance = axios.create({
     Accept: "application/json",
     "Content-Type": "application/json",
   },
-  withCredentials: true,
+  // withCredentials: true,
 });
 
-export const CallApiHost: AxiosInstance = axios.create({
-  baseURL: import.meta.env.VITE_APP_PANEL_BASE_URL,
-  headers: {
-    Accept: "application/json",
-    "Content-Type": "application/json",
-  },
-  withCredentials: true,
-});
+// export const CallApiHost: AxiosInstance = axios.create({
+//   baseURL: import.meta.env.VITE_APP_PANEL_BASE_URL,
+//   headers: {
+//     Accept: "application/json",
+//     "Content-Type": "application/json",
+//   },
+//   withCredentials: true,
+// });
 
 export const PostApi: AxiosInstance = axios.create({
   baseURL: import.meta.env.VITE_APP_BASE_URL,
