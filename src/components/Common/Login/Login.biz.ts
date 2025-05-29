@@ -3,7 +3,7 @@ import { Box, Button, Input, Text, useDisclosure } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import useAuthStore from "@/store/authStore";
-import { phoneRegex } from "@/utils/Regex/Regex";
+import { emailRegex, phoneRegex } from "@/utils/Regex/Regex";
 import { useLocation, useRoutes } from "react-router-dom";
 
 interface ILogin {
@@ -12,18 +12,25 @@ interface ILogin {
   onClose: () => void;
 }
 export const useLogin = () => {
-  const [phoneNumber, setPhoneNumber] = useState("");
+  const [email, setEmail] = useState("");
   const [otp, setOtp] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [serverOtpKey, setServerOtpKey] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [step, setStep] = useState<"phone" | "otp">("phone");
+  const { pathname } = useLocation();
+  const [step, setStep] = useState<"email" | "otp">("email");
+
   const handleSendOtp = async () => {
     setLoading(true);
     axios
-      .post(`${import.meta.env.VITE_APP_BASE_URL}/auth/_init`, {
-        loginIdentifier: phoneNumber,
-      })
+      .post(
+        `${
+          import.meta.env.VITE_APP_BASE_URL
+        }authorization/login-whit-otp/create-otp/`,
+        {
+          email,
+        }
+      )
       .then(({ data }) => {
         setServerOtpKey(data);
         // handleLogin();
@@ -38,7 +45,7 @@ export const useLogin = () => {
   };
 
   const handleSetPhoneNumber = () => {
-    if (phoneRegex.test(phoneNumber)) {
+    if (emailRegex.test(email)) {
       handleSendOtp();
     } else {
       setErrorMessage("phone number is incorrect");
@@ -47,43 +54,48 @@ export const useLogin = () => {
 
   const handleReset = () => {
     setErrorMessage("");
-    setPhoneNumber("");
-    setStep("phone");
+    setEmail("");
+    setStep("email");
     setOtp("");
   };
-  const { pathname } = useLocation();
   const handleVerifyOtp = async () => {
-    setLoading(true)
+    setLoading(true);
 
     axios
-      .post(`${import.meta.env.VITE_APP_BASE_URL}/auth/_authenticate`, {
-        otp,
-        code: serverOtpKey,
-      })
+      .post(
+        `${
+          import.meta.env.VITE_APP_BASE_URL
+        }authorization/login-whit-otp/validate-otp/`,
+        {
+          code: otp,
+          email,
+          // code: serverOtpKey,
+        }
+      )
       .then(({ data }) => {
-        window.location.replace(
-          `${
-            import.meta.env.VITE_APP_BASE_URL
-          }/auth/_authorize?code=${data}&returnUrl=${pathname}`
-        );
+        console.log("data:", data);
+        
       })
       .catch((err) => {
         console.log(err);
+      })
+      .finally(() => {
+        setLoading(false);
       });
   };
 
   return {
-    handleSetPhoneNumber,
-    phoneNumber,
-    setPhoneNumber,
     otp,
-    loading,
-    setLoading,
     step,
-    errorMessage,
-    handleReset,
+    email,
     setOtp,
+    loading,
+    setEmail,
+    setLoading,
+    handleReset,
+    errorMessage,
     handleVerifyOtp,
     setErrorMessage,
+    handleSetPhoneNumber,
   };
 };

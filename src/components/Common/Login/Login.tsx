@@ -20,8 +20,8 @@ interface ILogin {
 export const Login = ({ isOpen = true, onOpen, onClose }: ILogin) => {
   const {
     handleSetPhoneNumber,
-    phoneNumber,
-    setPhoneNumber,
+    email,
+    setEmail,
     otp,
     loading,
     setLoading,
@@ -45,10 +45,10 @@ export const Login = ({ isOpen = true, onOpen, onClose }: ILogin) => {
         handleReset();
       }}
     >
-      {step === "phone" ? (
+      {step === "email" ? (
         <PhoneNumberStep
-          phoneNumber={phoneNumber}
-          setPhoneNumber={setPhoneNumber}
+          phoneNumber={email}
+          setPhoneNumber={setEmail}
           errorMessage={errorMessage}
           loading={loading}
           setLoading={setLoading}
@@ -78,13 +78,12 @@ const PhoneNumberStep = ({
   return (
     <Box color="amir.mainBg" p="4">
       <Flex mb="4">
-        <Text color={"amir.common"}>please enter your phone number</Text>
+        <Text color={"amir.common"}>please enter your Email</Text>
       </Flex>
       <Input
         mb="4"
-        placeholder="09123456789"
+        placeholder="example@email.com"
         dir="ltr"
-        maxLength={11}
         color="amir.common"
         _placeholder="amir.common"
         _focusVisible={{ borderColor: "amir.primary" }}
@@ -136,11 +135,15 @@ const OtpStep = ({ otp, setOtp, handleSendOtp, loading }: any) => {
             _focusVisible={{ borderColor: "amir.primary" }}
             color={"amir.common"}
           />
+          <PinInputField
+            _focusVisible={{ borderColor: "amir.primary" }}
+            color={"amir.common"}
+          />
         </PinInput>
       </HStack>
       <Button
         my="2"
-        isDisabled={otp.length !== 4}
+        isDisabled={otp.length !== 5}
         isLoading={loading}
         bg={"amir.primary"}
         w={"100%"}
