@@ -1,6 +1,7 @@
 import { CallApi, PostApi } from "@/settings/axiosConfig";
 import { IScenario } from "@/types/responses/ResponsesTypes";
 import { yupResolver } from "@hookform/resolvers/yup";
+import axios from "axios";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
@@ -25,6 +26,13 @@ export const usePanelEventCreate = () => {
     getValues,
     formState: { errors },
   } = useForm({ resolver: yupResolver(schema) });
+
+  const [categoryList, setCategoryList] = useState([]);
+  useEffect(() => {
+    CallApi.get("/event/selection-items/category/").then((res) => {
+      setCategoryList(res.data);
+    });
+  }, []);
   const onSubmit = (data: any) => {
     setLoading(true);
 
@@ -37,7 +45,6 @@ export const usePanelEventCreate = () => {
     formData.append("description", data.description);
     formData.append("datetime", data.date);
     formData.append("title", data.title);
-    // formData.append("attachment", data.attachment);
     formData.append("attachment", data.attachment, data.attachment.name);
 
     formData.append("recurrence", data.recurrence);
@@ -59,8 +66,9 @@ export const usePanelEventCreate = () => {
     setValue,
     onSubmit,
     register,
-    handleSubmit,
     getValues,
+    handleSubmit,
+    categoryList,
   };
 };
 

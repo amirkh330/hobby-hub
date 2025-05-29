@@ -33,6 +33,7 @@ export const PanelEventCreate = () => {
     register,
     setValue,
     getValues,
+    categoryList,
     control,
     loading,
   } = usePanelEventCreate();
@@ -40,9 +41,7 @@ export const PanelEventCreate = () => {
   const border = useColorModeValue("gray.300", "gray.600");
   const hoverBg = useColorModeValue("gray.100", "gray.600");
   const file = useWatch({ control, name: "attachment" });
-  console.log("file:", file);
   const imageUrl = file ? URL.createObjectURL(file as any) : null;
-  console.log("imageUrl:", imageUrl);
   return (
     <chakra.div
       pt="4"
@@ -68,9 +67,11 @@ export const PanelEventCreate = () => {
                 Category
               </FormLabel>
               <Select placeholder="event category" {...register("category")}>
-                <option value="1">sport</option>
-                <option value="2">game</option>
-                <option value="3">education</option>
+                {categoryList?.map((item: any) => (
+                  <option value={item.id} key={item.id}>
+                    {item.title}
+                  </option>
+                ))}
               </Select>
               <FormErrorMessage>{errors.category?.message}</FormErrorMessage>
             </FormControl>
@@ -83,7 +84,7 @@ export const PanelEventCreate = () => {
                 placeholder="event recurrence"
                 {...register("recurrence")}
               >
-                <option value="ONE_TIME">ONE_TIME</option>
+                <option value="ONE_TIME">ONE TIME</option>
                 <option value="WEEKLY">WEEKLY</option>
                 <option value="MONTHLY">MONTHLY</option>
                 <option value="QUARTERLY">QUARTERLY</option>
