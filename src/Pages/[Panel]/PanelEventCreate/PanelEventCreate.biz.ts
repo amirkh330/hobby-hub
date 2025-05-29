@@ -22,37 +22,33 @@ export const usePanelEventCreate = () => {
     handleSubmit,
     control,
     setValue,
+    getValues,
     formState: { errors },
   } = useForm({ resolver: yupResolver(schema) });
-  const onSubmit = (e: any) => {
-    console.log('e:', e)
-    // const formData = new FormData();
-    // Object.keys(data).forEach((key) => {
-    //   const typedKey = key as keyof FormData;
-    //   if (typedKey === "avatarFile" && data[typedKey] instanceof File) {
-    //     formData.append(key, data[typedKey]);
-    //   } else {
-    //     formData.append(key, data[typedKey] as string);
-    //   }
-    // });
-
-
+  const onSubmit = (data: any) => {
     setLoading(true);
-    const newData = {
-      latitude: e.location.lat,
-      longitude: e.location.lng,
-      address: e.address,
-      category: e.category,
-      description: e.description,
-      datetime: e.date,
-      title: e.title,
-      recurrence: "ONE_TIME",
-    };
-    
-    console.log('newData:', newData)
-    CallApi.post("/event/", newData)
+
+    const formData = new FormData();
+
+    formData.append("latitude", data.location.lat);
+    formData.append("longitude", data.location.lng);
+    formData.append("address", data.address);
+    formData.append("category", data.category);
+    formData.append("description", data.description);
+    formData.append("datetime", data.date);
+    formData.append("title", data.title);
+    // formData.append("attachment", data.attachment);
+    formData.append("attachment", data.attachment, data.attachment.name);
+
+    formData.append("recurrence", data.recurrence);
+
+    CallApi.post("/event/", formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    })
       .then(() => {
-        // navigate("/hobby-list");
+        navigate("/hobby-list");
       })
       .finally(() => setLoading(false));
   };
@@ -64,6 +60,7 @@ export const usePanelEventCreate = () => {
     onSubmit,
     register,
     handleSubmit,
+    getValues,
   };
 };
 
@@ -73,7 +70,14 @@ const schema = yup.object().shape({
   category: yup.string().required(""),
   location: yup.object().required("please insert location"),
   address: yup.string().required(""),
-  // upload: yup.array().required(""),
+  attachment: yup
+    .mixed()
+    .test("file", "", (value) => {
+      if (!value) return true; // allow empty values
+      if (!(value instanceof File)) return false; // check if value is an instance of File
+      return true;
+    })
+    .required("please insert image"),
   date: yup.string().required("please insert date"),
   description: yup.string().required(""),
 });

@@ -10,6 +10,7 @@ import {
   FormControl,
   FormErrorMessage,
   FormLabel,
+  Image,
   Input,
   Select,
   Text,
@@ -20,13 +21,28 @@ import {
 import { usePanelEventCreate } from "./PanelEventCreate.biz";
 import Icon from "react-multi-date-picker/components/icon";
 import { Upload } from "@phosphor-icons/react";
+import { get } from "http";
+import { useRef } from "react";
+import { useWatch } from "react-hook-form";
 
 export const PanelEventCreate = () => {
-  const { handleSubmit, onSubmit, control, errors, register, setValue } =
-    usePanelEventCreate();
+  const {
+    handleSubmit,
+    onSubmit,
+    errors,
+    register,
+    setValue,
+    getValues,
+    control,
+    loading,
+  } = usePanelEventCreate();
   const bg = useColorModeValue("gray.50", "gray.700");
   const border = useColorModeValue("gray.300", "gray.600");
   const hoverBg = useColorModeValue("gray.100", "gray.600");
+  const file = useWatch({ control, name: "attachment" });
+  console.log("file:", file);
+  const imageUrl = file ? URL.createObjectURL(file as any) : null;
+  console.log("imageUrl:", imageUrl);
   return (
     <chakra.div
       pt="4"
@@ -116,8 +132,8 @@ export const PanelEventCreate = () => {
               {/* <Input placeholder="event date" {...register("date")} mt={4} /> */}
               <FormErrorMessage>{errors.date?.message}</FormErrorMessage>
             </FormControl>
-{/* 
-            <FormControl isInvalid={!!errors.upload}>
+
+            <FormControl isInvalid={!!errors.attachment}>
               <FormLabel fontSize={"16px"} fontWeight={600} color="amir.common">
                 upload images
               </FormLabel>
@@ -137,29 +153,48 @@ export const PanelEventCreate = () => {
                   w="full"
                   textAlign="center"
                 >
-                  <VStack spacing={3}>
-                    <Text fontSize="lg" fontWeight="medium" color="gray.500">
-                      Click to upload or drag and drop
-                    </Text>
-                    <Text fontSize="sm" color="gray.400">
-                      SVG, PNG, JPG, or GIF (max. 10MB)
-                    </Text>
-                  </VStack>
+                  {imageUrl ? (
+                    <Image
+                      src={imageUrl}
+                      alt="Uploaded image"
+                      maxH="200px"
+                      objectFit="contain"
+                    />
+                  ) : (
+                    <>
+                      <Text fontSize="lg" fontWeight="medium" color="gray.500">
+                        Click to upload or drag and drop
+                      </Text>
+                      <Text fontSize="sm" color="gray.400">
+                        SVG, PNG, JPG, or GIF (max. 10MB)
+                      </Text>
+                    </>
+                  )}
                   <Input
                     id="file-upload"
                     type="file"
                     hidden
-                    // onChange={handleFileChange}
+                    onChange={(e) => {
+                      const file = e.target.files?.[0];
+                      if (file) {
+                        setValue("attachment", file);
+                      }
+                    }}
                   />
                 </Box>
               </Flex>
-              <FormErrorMessage>{errors.upload?.message}</FormErrorMessage>
-            </FormControl> */}
-
-            
+              <FormErrorMessage>{errors.attachment?.message}</FormErrorMessage>
+            </FormControl>
           </VStack>
 
-          <Button w="full" type="submit" mx="0" my="4" bgColor={"amir.primary"}>
+          <Button
+            w="full"
+            type="submit"
+            mx="0"
+            my="4"
+            bgColor={"amir.primary"}
+            isLoading={loading}
+          >
             Create Event
           </Button>
         </form>

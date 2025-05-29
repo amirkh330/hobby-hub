@@ -29,7 +29,7 @@ export const PanelEventDetail = () => {
                 h="104px"
                 objectFit="cover"
                 borderRadius={"8px"}
-                src={"/images/woman.jpg"}
+                src={eventItem?.event_attachments[0]?.attachment}
               />
             </Flex>
 

@@ -24,7 +24,7 @@ export const EventCard = ({ event }: { event: any }) => {
     >
       <Flex mx="0">
         <Box mx="0">
-          <Image h="100px" src={"/images/woman.jpg"} />
+          <Image h="100px" src={event.event_attachments[0]?.attachment} />
           {/* {allowShowHost && (
           <Box
             borderRadius="50%"

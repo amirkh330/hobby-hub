@@ -53,95 +53,95 @@ export const MyEvents = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const [activeTicket, setActiveTicket] = useState<ITicketItem>();
 
-  useEffect(() => {
-    CallApi.get("/me/reservations")
-      .then(({ data }) => {
-        setReserveList(data);
-      })
-      .finally(() => {
-        setLoading(false);
-      });
-  }, []);
+  // useEffect(() => {
+  //   CallApi.get("/me/reservations")
+  //     .then(({ data }) => {
+  //       setReserveList(data);
+  //     })
+  //     .finally(() => {
+  //       setLoading(false);
+  //     });
+  // }, []);
 
-  const renderStatus = ({ status, gameSessionId }: ITicketItem) => {
-    switch (status) {
-      case "Ready":
-        return (
-          <chakra.div
-            w="fit-content"
-            mx="0"
-            p="1"
-            borderRadius={"4px"}
-            fontSize={"12px"}
-            bgColor={"amir.primary"}
-          >
-            در انتظار
-          </chakra.div>
-        );
-      case "Started":
-        return (
-          <chakra.div
-            onClick={() => navigate(`/games/sessions/${gameSessionId}`)}
-            w="fit-content"
-            mx="0"
-            p="1"
-            borderRadius={"4px"}
-            fontSize={"12px"}
-            border={"1px solid"}
-            bgColor={"transparent"}
-            borderColor={"amir.primary"}
-            color={"amir.primary"}
-          >
-            دیدن نقش
-          </chakra.div>
-        );
-      case "Canceled":
-        return (
-          <chakra.div
-            w="fit-content"
-            mx="0"
-            p="1"
-            borderRadius={"4px"}
-            fontSize={"12px"}
-            bg="red.200"
-            color="red.700"
-          >
-            لغو شده
-          </chakra.div>
-        );
-      case "PENDING":
-        return (
-          <chakra.div
-            w="fit-content"
-            mx="0"
-            p="1"
-            borderRadius={"4px"}
-            fontSize={"12px"}
-            bg=""
-            color={"green.400"}
-          >
-            در انتظار
-          </chakra.div>
-        );
-      default:
-        return (
-          <chakra.div
-            onClick={() => navigate(`/games/sessions/${gameSessionId}`)}
-            w="fit-content"
-            mx="0"
-            p="1"
-            borderRadius={"4px"}
-            fontSize={"12px"}
-            border={"1px solid"}
-            bgColor={"transparent"}
-            borderColor={"amir.primary"}
-            color={"amir.primary"}
-          >
-            available
-          </chakra.div>
-        );
-    }
-  };
+  // const renderStatus = ({ status, gameSessionId }: ITicketItem) => {
+  //   switch (status) {
+  //     case "Ready":
+  //       return (
+  //         <chakra.div
+  //           w="fit-content"
+  //           mx="0"
+  //           p="1"
+  //           borderRadius={"4px"}
+  //           fontSize={"12px"}
+  //           bgColor={"amir.primary"}
+  //         >
+  //           در انتظار
+  //         </chakra.div>
+  //       );
+  //     case "Started":
+  //       return (
+  //         <chakra.div
+  //           onClick={() => navigate(`/games/sessions/${gameSessionId}`)}
+  //           w="fit-content"
+  //           mx="0"
+  //           p="1"
+  //           borderRadius={"4px"}
+  //           fontSize={"12px"}
+  //           border={"1px solid"}
+  //           bgColor={"transparent"}
+  //           borderColor={"amir.primary"}
+  //           color={"amir.primary"}
+  //         >
+  //           دیدن نقش
+  //         </chakra.div>
+  //       );
+  //     case "Canceled":
+  //       return (
+  //         <chakra.div
+  //           w="fit-content"
+  //           mx="0"
+  //           p="1"
+  //           borderRadius={"4px"}
+  //           fontSize={"12px"}
+  //           bg="red.200"
+  //           color="red.700"
+  //         >
+  //           لغو شده
+  //         </chakra.div>
+  //       );
+  //     case "PENDING":
+  //       return (
+  //         <chakra.div
+  //           w="fit-content"
+  //           mx="0"
+  //           p="1"
+  //           borderRadius={"4px"}
+  //           fontSize={"12px"}
+  //           bg=""
+  //           color={"green.400"}
+  //         >
+  //           در انتظار
+  //         </chakra.div>
+  //       );
+  //     default:
+  //       return (
+  //         <chakra.div
+  //           onClick={() => navigate(`/games/sessions/${gameSessionId}`)}
+  //           w="fit-content"
+  //           mx="0"
+  //           p="1"
+  //           borderRadius={"4px"}
+  //           fontSize={"12px"}
+  //           border={"1px solid"}
+  //           bgColor={"transparent"}
+  //           borderColor={"amir.primary"}
+  //           color={"amir.primary"}
+  //         >
+  //           available
+  //         </chakra.div>
+  //       );
+  //   }
+  // };
   return (
     <chakra.div
       display="flex"
@@ -160,7 +160,7 @@ export const MyEvents = () => {
           Create Event
         </Button>
       </Flex>
-      {loading ? (
+      {/* {loading ? (
         <Loading />
       ) : false ? (
         // ) : !reserveList.length ? (
@@ -181,7 +181,7 @@ export const MyEvents = () => {
               objectFit="cover"
             />
           </Center> */}
-          <Center>
+          {/* <Center>
             <Button mt="8" onClick={onOpenLogin} bgColor="amir.primary" w="70%">
               login
             </Button>
@@ -277,7 +277,8 @@ export const MyEvents = () => {
               );
             })}
         </chakra.div>
-      )}
+      )} */}
+
       {isOpen && (
         <Ticket
           isOpen={isOpen}
