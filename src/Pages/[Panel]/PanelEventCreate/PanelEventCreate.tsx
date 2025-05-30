@@ -5,7 +5,6 @@ import {
   Box,
   Button,
   chakra,
-  Container,
   Flex,
   FormControl,
   FormErrorMessage,
@@ -16,14 +15,10 @@ import {
   Text,
   Textarea,
   useColorModeValue,
-  VStack,
+  VStack
 } from "@chakra-ui/react";
-import { usePanelEventCreate } from "./PanelEventCreate.biz";
-import Icon from "react-multi-date-picker/components/icon";
-import { Upload } from "@phosphor-icons/react";
-import { get } from "http";
-import { useRef } from "react";
 import { useWatch } from "react-hook-form";
+import { usePanelEventCreate } from "./PanelEventCreate.biz";
 
 export const PanelEventCreate = () => {
   const {

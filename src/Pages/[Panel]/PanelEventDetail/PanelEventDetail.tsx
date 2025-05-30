@@ -4,9 +4,18 @@ import Map from "@/components/CoreComponents/Map/Map";
 import { Box, Button, chakra, Flex, Icon, Image, Text } from "@chakra-ui/react";
 import { CalendarBlank, MapPin, Users } from "@phosphor-icons/react";
 import { usePanelEventDetail } from "./PanelEventDetail.biz";
+import { Login } from "@/components/Common/Login/Login";
 
 export const PanelEventDetail = () => {
-  const { loading, eventItem } = usePanelEventDetail();
+  const {
+    loading,
+    eventItem,
+    handleApply,
+    isOpen,
+    onOpen,
+    onClose,
+    loadingBtn,
+  } = usePanelEventDetail();
   return (
     <chakra.div
       pt="4"
@@ -51,17 +60,6 @@ export const PanelEventDetail = () => {
                 {new Date(eventItem?.datetime).toLocaleString()}
               </Text>
             </Flex>
-            {/* <Flex
-              my="2"
-              alignItems="center"
-              width={"full"}
-              color={"amir.common"}
-            >
-              <Icon as={Users} mx="2" />
-              <Text fontSize="14px" color="amir.common">
-                3 person
-              </Text>
-            </Flex> */}
             <Flex
               my="2"
               alignItems="center"
@@ -84,12 +82,15 @@ export const PanelEventDetail = () => {
             color="amir.primary"
             bgColor="transparent"
             borderColor="amir.primary"
+            onClick={handleApply}
+            isLoading={loadingBtn}
           >
             Apply
           </Button>
         </chakra.div>
       )}
       <Footer />
+      {isOpen && <Login isOpen={isOpen} onOpen={onOpen} onClose={onClose} />}
     </chakra.div>
   );
 };

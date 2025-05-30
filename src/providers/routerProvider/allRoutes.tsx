@@ -14,9 +14,9 @@ const PrivateRoute = ({
   element: JSX.Element;
   isHost?: boolean;
 }) => {
-  const { isAuth, isHost: isHostStore } = useAuthStore();
+  const { isAuth } = useAuthStore();
   if (isHost) {
-    return isAuth && isHostStore ? element : <Navigate to="/" replace />;
+    return isAuth ? element : <Navigate to="/" replace />;
   } else return isAuth ? element : <Navigate to="/" replace />;
 };
 

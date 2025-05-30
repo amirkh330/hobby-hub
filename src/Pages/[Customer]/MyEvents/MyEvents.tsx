@@ -17,6 +17,7 @@ import { CallApi } from "@/settings/axiosConfig";
 import { Loading } from "@/components/CoreComponents/Loading/Loading";
 import { Link, useNavigate } from "react-router-dom";
 import { Login } from "@/components/Common/Login/Login";
+import useAuthStore from "@/store/authStore";
 
 export interface ITicketItem {
   id: number;
@@ -49,99 +50,17 @@ export const MyEvents = () => {
     onOpen: onOpenLogin,
     onClose: onCloseLogin,
   } = useDisclosure();
-  const [reserveList, setReserveList] = useState<ITicketItem[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [activeTicket, setActiveTicket] = useState<ITicketItem>();
 
-  // useEffect(() => {
-  //   CallApi.get("/me/reservations")
-  //     .then(({ data }) => {
-  //       setReserveList(data);
-  //     })
-  //     .finally(() => {
-  //       setLoading(false);
-  //     });
-  // }, []);
-
-  // const renderStatus = ({ status, gameSessionId }: ITicketItem) => {
-  //   switch (status) {
-  //     case "Ready":
-  //       return (
-  //         <chakra.div
-  //           w="fit-content"
-  //           mx="0"
-  //           p="1"
-  //           borderRadius={"4px"}
-  //           fontSize={"12px"}
-  //           bgColor={"amir.primary"}
-  //         >
-  //           در انتظار
-  //         </chakra.div>
-  //       );
-  //     case "Started":
-  //       return (
-  //         <chakra.div
-  //           onClick={() => navigate(`/games/sessions/${gameSessionId}`)}
-  //           w="fit-content"
-  //           mx="0"
-  //           p="1"
-  //           borderRadius={"4px"}
-  //           fontSize={"12px"}
-  //           border={"1px solid"}
-  //           bgColor={"transparent"}
-  //           borderColor={"amir.primary"}
-  //           color={"amir.primary"}
-  //         >
-  //           دیدن نقش
-  //         </chakra.div>
-  //       );
-  //     case "Canceled":
-  //       return (
-  //         <chakra.div
-  //           w="fit-content"
-  //           mx="0"
-  //           p="1"
-  //           borderRadius={"4px"}
-  //           fontSize={"12px"}
-  //           bg="red.200"
-  //           color="red.700"
-  //         >
-  //           لغو شده
-  //         </chakra.div>
-  //       );
-  //     case "PENDING":
-  //       return (
-  //         <chakra.div
-  //           w="fit-content"
-  //           mx="0"
-  //           p="1"
-  //           borderRadius={"4px"}
-  //           fontSize={"12px"}
-  //           bg=""
-  //           color={"green.400"}
-  //         >
-  //           در انتظار
-  //         </chakra.div>
-  //       );
-  //     default:
-  //       return (
-  //         <chakra.div
-  //           onClick={() => navigate(`/games/sessions/${gameSessionId}`)}
-  //           w="fit-content"
-  //           mx="0"
-  //           p="1"
-  //           borderRadius={"4px"}
-  //           fontSize={"12px"}
-  //           border={"1px solid"}
-  //           bgColor={"transparent"}
-  //           borderColor={"amir.primary"}
-  //           color={"amir.primary"}
-  //         >
-  //           available
-  //         </chakra.div>
-  //       );
-  //   }
-  // };
+  const { isAuth } = useAuthStore();
+  const handleCreateNewEvent = () => {
+    if (isAuth) {
+      navigate("/create-event");
+    } else {
+      onOpenLogin();
+    }
+  };
   return (
     <chakra.div
       display="flex"
@@ -154,8 +73,7 @@ export const MyEvents = () => {
           w="full"
           mx="4"
           bgColor={"amir.primary"}
-          as={Link}
-          to="/create-event"
+          onClick={handleCreateNewEvent}
         >
           Create Event
         </Button>
@@ -181,7 +99,7 @@ export const MyEvents = () => {
               objectFit="cover"
             />
           </Center> */}
-          {/* <Center>
+      {/* <Center>
             <Button mt="8" onClick={onOpenLogin} bgColor="amir.primary" w="70%">
               login
             </Button>
@@ -278,7 +196,13 @@ export const MyEvents = () => {
             })}
         </chakra.div>
       )} */}
-
+      {isOpenLogin && (
+        <Login
+          isOpen={isOpenLogin}
+          onOpen={onOpenLogin}
+          onClose={onCloseLogin}
+        />
+      )}
       {isOpen && (
         <Ticket
           isOpen={isOpen}

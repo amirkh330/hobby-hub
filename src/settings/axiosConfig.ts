@@ -1,3 +1,4 @@
+import useAuthStore from "@/store/authStore";
 import axios, { AxiosInstance } from "axios";
 
 export const CallApi: AxiosInstance = axios.create({
@@ -8,6 +9,18 @@ export const CallApi: AxiosInstance = axios.create({
   },
   // withCredentials: true,
 });
+CallApi.interceptors.request.use(
+  (config) => {
+    const accessToken = useAuthStore.getState().access;
+    if (accessToken) {
+      config.headers.Authorization = `JWT ${accessToken}`;
+    }
+    return config;
+  },
+  (error) => {
+    return Promise.reject(error);
+  }
+);
 
 export const CallApiHost: AxiosInstance = axios.create({
   baseURL: import.meta.env.VITE_APP_PANEL_BASE_URL,

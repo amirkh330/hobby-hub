@@ -9,15 +9,15 @@ import { log } from "node:console";
 import { Login } from "../Login/Login";
 
 export const Layout = () => {
-  const { isOpen, onOpen, onClose } = useDisclosure();
-  const navigate = useNavigate();
-  const toast = useToast();
+  // const { isOpen, onOpen, onClose } = useDisclosure();
+  // const navigate = useNavigate();
+  // const toast = useToast();
 
   return (
     <Box maxWidth="400px" width="100%" bg="amir.mainBg" height="100dvh">
       <Header />
       <Outlet />
-      {isOpen && <Login isOpen={isOpen} onOpen={onOpen} onClose={onClose} />}
+      {/* {isOpen && <Login isOpen={isOpen} onOpen={onOpen} onClose={onClose} />} */}
     </Box>
   );
 };

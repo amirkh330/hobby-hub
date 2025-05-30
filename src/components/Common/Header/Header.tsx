@@ -2,14 +2,11 @@ import useAuthStore from "@/store/authStore";
 import { Box, Flex, Text, useDisclosure, useToast } from "@chakra-ui/react";
 import { Login } from "../Login/Login";
 import Menu from "../Menu/Menu";
-import { title } from "process";
-import { Link, useNavigate } from "react-router-dom";
 
 export const Header = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { isAuth, logout } = useAuthStore();
   const toast = useToast();
-  const navigate = useNavigate();
   const handleLogout = () => {
     logout();
     toast({
