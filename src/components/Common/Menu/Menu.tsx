@@ -16,8 +16,8 @@ import { List } from "@phosphor-icons/react";
 import { Link } from "react-router-dom";
 
 const Menu = () => {
-  const { isOpen, onOpen, onClose } = useDisclosure();
-  const { isHost } = useAuthStore();
+  const { 
+    isOpen, onOpen, onClose } = useDisclosure();
   return (
     <>
       <Icon as={List} size={18} onClick={onOpen} />
