@@ -31,7 +31,7 @@ export const Login = ({ isOpen = true, onOpen, onClose }: ILogin) => {
     setOtp,
     handleVerifyOtp,
     setErrorMessage,
-  } = useLogin();
+  } = useLogin(onClose);
 
   if (!isOpen) return null;
 

@@ -1,25 +1,34 @@
 import BottomSheet from "@/components/CoreComponents/BottomSheet/BottomSheet";
-import { Box, Button, Input, Text, useDisclosure } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Input,
+  Text,
+  useDisclosure,
+  useToast,
+} from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import useAuthStore from "@/store/authStore";
 import { emailRegex, phoneRegex } from "@/utils/Regex/Regex";
 import { useLocation, useRoutes } from "react-router-dom";
+import { Login } from "./Login";
 
 interface ILogin {
   isOpen: boolean;
   onOpen: () => void;
   onClose: () => void;
 }
-export const useLogin = () => {
-  const [email, setEmail] = useState("");
+export const useLogin = (onClose: () => void) => {
+  const toast = useToast();
   const [otp, setOtp] = useState("");
+  const [email, setEmail] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [serverOtpKey, setServerOtpKey] = useState(null);
   const [loading, setLoading] = useState(false);
   const { pathname } = useLocation();
   const [step, setStep] = useState<"email" | "otp">("email");
-
+  const { loginUser } = useAuthStore();
   const handleSendOtp = async () => {
     setLoading(true);
     axios
@@ -69,12 +78,18 @@ export const useLogin = () => {
         {
           code: otp,
           email,
-          // code: serverOtpKey,
         }
       )
       .then(({ data }) => {
         console.log("data:", data);
-        
+        toast({
+          title: "Welcome dear",
+          description: "Login successfully",
+          status: "success",
+          position: "top",
+        });
+        loginUser({ access: data.access, refresh: data.refresh });
+        onClose();
       })
       .catch((err) => {
         console.log(err);

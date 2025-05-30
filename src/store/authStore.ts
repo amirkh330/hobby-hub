@@ -2,9 +2,10 @@ import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
 interface AuthState {
+  access: string;
+  refresh: string;
   isAuth: boolean;
-  isHost: boolean;
-  login: (isHost: boolean) => void;
+  loginUser: ({access, refresh}:{access: string, refresh: string}) => void;
   logout: () => void;
 }
 
@@ -12,22 +13,23 @@ const useAuthStore = create<AuthState>()(
   persist(
     (set) => ({
       isAuth: false,
-      isHost: false,
-      login: (isHost) => {
+      access: "",
+      refresh: "",
+      loginUser: ({access, refresh}) => {
         set({
           isAuth: true,
-          isHost,
+          access,
+          refresh,
         });
       },
 
       logout: () => {
         set({
           isAuth: false,
-          isHost: false,
+          access: "",
+          refresh: "",
         });
         localStorage.clear();
-        document.cookie =
-          "x-a=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=.bazmino.com;";
       },
     }),
     {
