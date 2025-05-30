@@ -1,6 +1,7 @@
 import { CallApi } from "@/settings/axiosConfig";
 import { IEventItem } from "@/types/responses/ResponsesTypes";
-import { useEffect, useState } from "react";
+import debounce from "lodash.debounce";
+import { useCallback, useEffect, useState } from "react";
 import gregorian from "react-date-object/calendars/gregorian";
 import gregorian_en from "react-date-object/locales/gregorian_en";
 import { DateObject } from "react-multi-date-picker";
@@ -8,6 +9,7 @@ import { useSearchParams } from "react-router-dom";
 
 export const useEvents = () => {
   const [eventList, setEventList] = useState<IEventItem[]>([]);
+
   const [page, setPage] = useState<number>(1);
   const [total, setTotal] = useState<number>();
   const [loading, setLoading] = useState<boolean>(false);
@@ -28,9 +30,10 @@ export const useEvents = () => {
     ...(districts && { districts: districts }),
   });
 
+  const [search, setSearch] = useState("");
   useEffect(() => {
     setLoading(true);
-    CallApi.get(`event/`)
+    CallApi.get(`event/?search=${search}`)
       // CallApi.get(`event/attendee/_filter?${params}`)
       .then(({ data }) => {
         if (data.page_count === 1) {
@@ -45,15 +48,18 @@ export const useEvents = () => {
       .finally(() => {
         setLoading(false);
       });
-  }, [queryType, time, page, districts]);
+  }, [queryType, time, page, districts,search]);
 
-  const [list, setList] = useState([]);
+  const debouncedSearch = useCallback(
+    debounce((value) => {
+      setSearch(value);
+    }, 500),
+    []
+  );
 
-  // useEffect(() => {
-  //   CallApi.get("/cms/slider-items").then(({ data }) => {
-  //     setList(data);
-  //   });
-  // }, []);
+  const handleSearchChange = (e:any) => {
+    debouncedSearch(e.target.value);
+  };
 
-  return { eventList, loading, total, setPage, page, list };
+  return { eventList, loading, total, setPage, page, handleSearchChange };
 };

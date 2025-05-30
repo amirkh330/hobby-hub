@@ -20,8 +20,8 @@ import { useEvents } from "./Events.biz";
 import { EmptyState } from "@/components/Common/EmptyState/EmptyState";
 
 export const Events = () => {
-  const { eventList, loading, total, setPage, list } = useEvents();
-  console.log("eventList:", eventList);
+  const { eventList, loading, total, setPage, handleSearchChange } =
+    useEvents();
   return (
     <chakra.div
       pt="4"
@@ -55,6 +55,7 @@ export const Events = () => {
             width="full"
             // p="1"
             ps="8"
+            onChange={handleSearchChange}
             border="none"
             _placeholder={{ color: "amir.common" }}
             _active={{

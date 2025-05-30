@@ -81,7 +81,6 @@ export const useLogin = (onClose: () => void) => {
         }
       )
       .then(({ data }) => {
-        console.log("data:", data);
         toast({
           title: "Welcome dear",
           description: "Login successfully",
